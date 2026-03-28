@@ -1,0 +1,43 @@
+{
+  "id": "NK-2Ciy8EG7jz1YHMGCxYLb25",
+  "caption": "Viktor Anatolyevich Bout",
+  "schema": "Person",
+  "properties": {
+    "name": ["Viktor Anatolyevich Bout", "Viktor Bout", "Виктор Бут"],
+    "birthDate": ["1967-01-13"],
+    "nationality": ["ru"],
+    "topics": ["sanction"],
+    "gender": ["male"]
+  },
+  "datasets": ["us_ofac_sdn", "eu_fsf", "un_sc_sanctions"],
+  "referents": ["ofac-12345", "eu-67890"],
+  "first_seen": "2004-06-01T00:00:00",
+  "last_seen": "2026-03-28T00:00:00",
+  "target": true,
+  "last_change": "2026-03-25T00:00:00",
+  "adjacent": {
+    "ownershipOwner": {
+      "results": [
+        {
+          "id": "NK-abc123",
+          "caption": "Air Cess Ltd",
+          "schema": "Company",
+          "properties": {
+            "name": ["Air Cess Ltd"],
+            "jurisdiction": ["be"],
+            "topics": ["sanction"]
+          },
+          "datasets": ["us_ofac_sdn"],
+          "referents": [],
+          "first_seen": "2005-01-01T00:00:00",
+          "last_seen": "2026-03-28T00:00:00",
+          "target": true,
+          "last_change": "2026-03-20T00:00:00"
+        }
+      ],
+      "total": 1,
+      "limit": 50,
+      "offset": 0
+    }
+  }
+}

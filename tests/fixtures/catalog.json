@@ -1,0 +1,50 @@
+{
+  "datasets": [
+    {
+      "name": "us_ofac_sdn",
+      "title": "US OFAC Specially Designated Nationals",
+      "summary": "The OFAC SDN list includes individuals and entities owned or controlled by targeted countries.",
+      "description": "Full description of the OFAC SDN list.",
+      "url": "https://www.treasury.gov/sdn",
+      "updated_at": "2026-03-25T12:00:00",
+      "last_export": "2026-03-25T12:00:00",
+      "entity_count": 12500,
+      "thing_count": 8200,
+      "version": "20260325",
+      "publisher": {
+        "name": "US Treasury Department",
+        "url": "https://www.treasury.gov",
+        "acronym": "OFAC",
+        "description": "Office of Foreign Assets Control",
+        "country": "us",
+        "country_label": "United States",
+        "official": true
+      },
+      "children": [],
+      "deprecated": false
+    },
+    {
+      "name": "eu_fsf",
+      "title": "EU Financial Sanctions",
+      "summary": "European Union consolidated financial sanctions list.",
+      "description": "Persons and entities subject to EU financial sanctions.",
+      "url": "https://data.europa.eu/data/datasets/consolidated-list-of-persons-groups-and-entities-subject-to-eu-financial-sanctions",
+      "updated_at": "2026-03-24T08:00:00",
+      "last_export": "2026-03-24T08:00:00",
+      "entity_count": 4200,
+      "thing_count": 2800,
+      "version": "20260324",
+      "publisher": {
+        "name": "European Commission",
+        "url": "https://ec.europa.eu",
+        "acronym": "EC",
+        "description": "European Commission",
+        "country": null,
+        "country_label": null,
+        "official": true
+      },
+      "children": [],
+      "deprecated": false
+    }
+  ]
+}

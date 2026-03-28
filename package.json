@@ -1,0 +1,52 @@
+{
+  "name": "opensanctions-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for sanctions screening and PEP checks via OpenSanctions API",
+  "type": "module",
+  "bin": {
+    "opensanctions-mcp": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "INTEGRATION=true vitest run",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "opensanctions",
+    "sanctions",
+    "pep",
+    "compliance",
+    "kyc",
+    "aml",
+    "screening"
+  ],
+  "author": "scka-de",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scka-de/opensanctions-mcp"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
+    "@types/node": "^25.5.0",
+    "tsup": "^8.4.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.1.0"
+  }
+}

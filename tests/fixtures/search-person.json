@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "id": "NK-2Ciy8EG7jz1YHMGCxYLb25",
+      "caption": "Viktor Anatolyevich Bout",
+      "schema": "Person",
+      "properties": {
+        "name": ["Viktor Anatolyevich Bout", "Viktor Bout"],
+        "birthDate": ["1967-01-13"],
+        "nationality": ["ru"],
+        "topics": ["sanction"]
+      },
+      "datasets": ["us_ofac_sdn", "eu_fsf", "un_sc_sanctions"],
+      "referents": [],
+      "first_seen": "2004-06-01T00:00:00",
+      "last_seen": "2026-03-28T00:00:00",
+      "target": true,
+      "last_change": "2026-03-25T00:00:00",
+      "score": 0.95,
+      "features": { "name_match": 0.95 },
+      "match": true
+    }
+  ],
+  "total": 1,
+  "limit": 20,
+  "offset": 0
+}
