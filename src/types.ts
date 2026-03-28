@@ -46,7 +46,7 @@ export interface MatchResponse {
 }
 
 export interface EntityResponse extends Entity {
-  adjacent: Record<string, AdjacentResult>;
+  adjacent?: Record<string, AdjacentResult> | null;
 }
 
 export interface AdjacentResult {

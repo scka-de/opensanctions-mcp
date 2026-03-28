@@ -115,7 +115,9 @@ function formatMatch(
   const relationships = [];
 
   if (entity) {
-    for (const [relationType, adjacent] of Object.entries(entity.adjacent)) {
+    for (const [relationType, adjacent] of Object.entries(
+      entity.adjacent ?? {},
+    )) {
       for (const related of adjacent.results) {
         relationships.push({
           relationship: relationType,
