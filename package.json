@@ -1,6 +1,7 @@
 {
   "name": "opensanctions-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "mcpName": "io.github.scka-de/opensanctions-mcp",
   "description": "MCP server for sanctions screening and PEP checks via OpenSanctions API",
   "type": "module",
   "bin": {
