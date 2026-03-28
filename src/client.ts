@@ -58,7 +58,7 @@ async function fetchWithRetry(
       }
 
       if (response.status >= 500 && attempt < config.maxRetries) {
-        const delay = 2000;
+        const delay = 2 ** attempt * 1000;
         logger.warn(
           `Server error (${response.status}), retrying in ${delay}ms`,
           {
@@ -74,19 +74,19 @@ async function fetchWithRetry(
     } catch (error) {
       lastError = error instanceof Error ? error : new Error(String(error));
 
-      if (lastError.name === "AbortError") {
-        throw new OpenSanctionsError(
-          `Request timeout after ${config.timeoutMs}ms: ${url}`,
-        );
-      }
-
       if (attempt < config.maxRetries) {
         const delay = 2 ** attempt * 1000;
-        logger.warn(`Network error, retrying in ${delay}ms`, {
+        const reason =
+          lastError.name === "AbortError" ? "Timeout" : "Network error";
+        logger.warn(`${reason}, retrying in ${delay}ms`, {
           attempt: attempt + 1,
           error: lastError.message,
         });
         await sleep(delay);
+      } else if (lastError.name === "AbortError") {
+        throw new OpenSanctionsError(
+          `Request timeout after ${config.timeoutMs}ms: ${url}`,
+        );
       }
     }
   }
@@ -161,7 +161,7 @@ export class OpenSanctionsClient {
     if (options?.schema) params.set("schema", options.schema);
     if (options?.limit) params.set("limit", String(options.limit));
 
-    const url = `${this.config.apiUrl}/search/${dataset}?${params}`;
+    const url = `${this.config.apiUrl}/search/${encodeURIComponent(dataset)}?${params}`;
     const response = await fetchWithRetry(
       url,
       { method: "GET", headers: headers(this.config) },
@@ -176,7 +176,7 @@ export class OpenSanctionsClient {
     options?: { dataset?: string },
   ): Promise<MatchResponse> {
     const dataset = options?.dataset || this.config.dataset;
-    const url = `${this.config.apiUrl}/match/${dataset}`;
+    const url = `${this.config.apiUrl}/match/${encodeURIComponent(dataset)}`;
     const body = {
       queries: {
         q: { schema, properties },
@@ -196,7 +196,7 @@ export class OpenSanctionsClient {
   }
 
   async getEntity(entityId: string): Promise<EntityResponse> {
-    const url = `${this.config.apiUrl}/entities/${entityId}`;
+    const url = `${this.config.apiUrl}/entities/${encodeURIComponent(entityId)}`;
     const response = await fetchWithRetry(
       url,
       { method: "GET", headers: headers(this.config) },

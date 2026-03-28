@@ -32,7 +32,7 @@ export async function handleMatchEntity(
   }));
 
   return JSON.stringify({
-    total: firstQuery.total,
+    total: firstQuery.total.value,
     matches,
   });
 }

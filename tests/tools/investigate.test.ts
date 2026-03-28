@@ -65,14 +65,14 @@ describe("investigate_entity tool", () => {
   it("respects threshold filter", async () => {
     const lowScoreMatch = {
       responses: {
-        "0": {
+        q: {
           results: [
             {
               ...matchFixture.responses.q.results[0],
               score: 0.5,
             },
           ],
-          total: 1,
+          total: { value: 1, relation: "eq" },
         },
       },
     };
@@ -90,7 +90,9 @@ describe("investigate_entity tool", () => {
 
   it("handles no matches", async () => {
     const client = mockClient({
-      matchResult: { responses: { "0": { results: [], total: 0 } } },
+      matchResult: {
+        responses: { q: { results: [], total: { value: 0, relation: "eq" } } },
+      },
     });
     const result = await handleInvestigateEntity(client, {
       name: "Nobody",
@@ -120,12 +122,12 @@ describe("investigate_entity tool", () => {
   it("deduplicates entity IDs before fetching", async () => {
     const duplicateMatch = {
       responses: {
-        "0": {
+        q: {
           results: [
             matchFixture.responses.q.results[0],
             { ...matchFixture.responses.q.results[0], score: 0.9 },
           ],
-          total: 2,
+          total: { value: 2, relation: "eq" },
         },
       },
     };
@@ -141,13 +143,13 @@ describe("investigate_entity tool", () => {
   it("limits matches to max_matches", async () => {
     const manyMatches = {
       responses: {
-        "0": {
+        q: {
           results: Array.from({ length: 10 }, (_, i) => ({
             ...matchFixture.responses.q.results[0],
             id: `NK-${i}`,
             score: 0.95 - i * 0.01,
           })),
-          total: 10,
+          total: { value: 10, relation: "eq" },
         },
       },
     };

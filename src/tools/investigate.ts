@@ -18,7 +18,7 @@ export async function handleInvestigateEntity(
   input: InvestigateEntityInput,
 ): Promise<string> {
   const threshold = input.threshold ?? 0.7;
-  const maxMatches = input.max_matches ?? 3;
+  const maxMatches = Math.min(input.max_matches ?? 3, 10);
 
   const properties: Record<string, string[]> = {
     name: [input.name],
@@ -118,7 +118,7 @@ function formatMatch(
     for (const [relationType, adjacent] of Object.entries(
       entity.adjacent ?? {},
     )) {
-      for (const related of adjacent.results) {
+      for (const related of adjacent.results ?? []) {
         relationships.push({
           relationship: relationType,
           id: related.id,

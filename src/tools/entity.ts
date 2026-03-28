@@ -14,7 +14,7 @@ export async function handleGetEntity(
   for (const [relationType, adjacent] of Object.entries(
     entity.adjacent ?? {},
   )) {
-    for (const related of adjacent.results) {
+    for (const related of adjacent.results ?? []) {
       relationships.push({
         relationship: relationType,
         id: related.id,

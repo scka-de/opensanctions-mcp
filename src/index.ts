@@ -20,12 +20,12 @@ export function createServer(): McpServer {
 
   server.tool(
     "search_entities",
-    `Search the OpenSanctions database by name or keyword. Returns matching entities with relevance scores.
+    `Search the OpenSanctions database by name or keyword. Returns matching entities ordered by relevance.
 
 Use this for exploratory queries: "find entities named Goldman", "search for companies in Russia".
-For formal sanctions screening with structured data, use match_entity instead.
+For formal sanctions screening with confidence scores, use match_entity instead.
 
-Scores range 0.0-1.0. Above 0.7 is a strong match. Results include which sanctions lists each entity appears on.`,
+Results include entity type, datasets (which sanctions lists), and properties. For numeric match scores, use match_entity.`,
     {
       query: z.string().describe("Name or keyword to search for"),
       schema: z
