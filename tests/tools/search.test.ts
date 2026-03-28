@@ -23,8 +23,7 @@ describe("search_entities tool", () => {
       schema: undefined,
       limit: undefined,
     });
-    expect(result).toContain("Viktor Anatolyevich Bout");
-    expect(result).toContain("0.95");
+    expect(result).toContain("Viktor Bout");
     expect(result).toContain("us_ofac_sdn");
   });
 
@@ -45,7 +44,12 @@ describe("search_entities tool", () => {
   });
 
   it("handles empty results", async () => {
-    const client = mockClient({ results: [], total: 0, limit: 20, offset: 0 });
+    const client = mockClient({
+      results: [],
+      total: { value: 0, relation: "eq" },
+      limit: 20,
+      offset: 0,
+    });
     const result = await handleSearchEntities(client, {
       query: "zzzznotfound",
     });

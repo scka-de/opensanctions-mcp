@@ -103,8 +103,7 @@ describe("OpenSanctionsClient", () => {
       const result = await client.search("Viktor Bout");
 
       expect(result.results).toHaveLength(1);
-      expect(result.results[0].caption).toBe("Viktor Anatolyevich Bout");
-      expect(result.results[0].score).toBe(0.95);
+      expect(result.results[0].caption).toBe("Viktor Bout");
       expect(fetch).toHaveBeenCalledWith(
         expect.stringContaining("/search/default?q=Viktor+Bout"),
         expect.objectContaining({ method: "GET" }),
@@ -142,8 +141,9 @@ describe("OpenSanctionsClient", () => {
         expect.objectContaining({
           method: "POST",
           body: JSON.stringify({
-            schema: "Person",
-            properties: { name: ["Viktor Bout"] },
+            queries: {
+              q: { schema: "Person", properties: { name: ["Viktor Bout"] } },
+            },
           }),
         }),
       );
@@ -158,11 +158,11 @@ describe("OpenSanctionsClient", () => {
       };
       mockFetch(entityResponse);
       const client = new OpenSanctionsClient(testConfig());
-      const result = await client.getEntity("NK-2Ciy8EG7jz1YHMGCxYLb25");
+      const result = await client.getEntity("Q314650");
 
-      expect(result.id).toBe("NK-2Ciy8EG7jz1YHMGCxYLb25");
+      expect(result.id).toBe("Q314650");
       expect(fetch).toHaveBeenCalledWith(
-        expect.stringContaining("/entities/NK-2Ciy8EG7jz1YHMGCxYLb25"),
+        expect.stringContaining("/entities/Q314650"),
         expect.anything(),
       );
     });

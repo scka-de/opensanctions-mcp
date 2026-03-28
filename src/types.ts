@@ -22,24 +22,31 @@ export interface Entity {
 
 export interface ScoredEntity extends Entity {
   score: number;
-  features: Record<string, number>;
   match: boolean;
+  explanations?: Record<string, unknown>[];
+}
+
+export interface SearchTotal {
+  value: number;
+  relation: string;
 }
 
 export interface SearchResponse {
-  results: ScoredEntity[];
-  total: number;
+  results: Entity[];
+  total: SearchTotal;
   limit: number;
   offset: number;
 }
 
 export interface MatchResponse {
-  responses: Record<string, { results: ScoredEntity[]; total: number }>;
-  query_text?: string;
+  responses: Record<
+    string,
+    { status: number; results: ScoredEntity[]; total: SearchTotal }
+  >;
 }
 
 export interface EntityResponse extends Entity {
-  adjacent: Record<string, AdjacentResult>;
+  adjacent?: Record<string, AdjacentResult> | null;
 }
 
 export interface AdjacentResult {

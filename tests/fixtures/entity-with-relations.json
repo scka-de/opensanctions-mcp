@@ -1,20 +1,20 @@
 {
-  "id": "NK-2Ciy8EG7jz1YHMGCxYLb25",
-  "caption": "Viktor Anatolyevich Bout",
+  "id": "Q314650",
+  "caption": "Viktor Bout",
   "schema": "Person",
   "properties": {
-    "name": ["Viktor Anatolyevich Bout", "Viktor Bout", "Виктор Бут"],
+    "name": ["Viktor Bout", "Viktor Anatolyevich Bout"],
     "birthDate": ["1967-01-13"],
-    "nationality": ["ru"],
+    "citizenship": ["ru"],
     "topics": ["sanction"],
     "gender": ["male"]
   },
-  "datasets": ["us_ofac_sdn", "eu_fsf", "un_sc_sanctions"],
-  "referents": ["ofac-12345", "eu-67890"],
-  "first_seen": "2004-06-01T00:00:00",
-  "last_seen": "2026-03-28T00:00:00",
+  "datasets": ["us_ofac_sdn", "us_trade_csl", "wikidata"],
+  "referents": ["ofac-8279"],
+  "first_seen": "2023-04-20T10:27:20",
+  "last_seen": "2026-03-25T12:53:09",
   "target": true,
-  "last_change": "2026-03-25T00:00:00",
+  "last_change": "2026-03-16T11:28:59",
   "adjacent": {
     "ownershipOwner": {
       "results": [

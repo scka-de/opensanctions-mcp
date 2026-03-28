@@ -33,7 +33,7 @@ describe("investigate_entity tool", () => {
     expect(parsed.query.name).toBe("Viktor Bout");
     expect(parsed.query.schema).toBe("Person");
     expect(parsed.matches).toHaveLength(1);
-    expect(parsed.matches[0].score).toBe(0.95);
+    expect(parsed.matches[0].score).toBe(1.0);
     expect(parsed.matches[0].datasets).toContain("us_ofac_sdn");
     expect(parsed.matches[0].relationships).toHaveLength(1);
     expect(parsed.matches[0].relationships[0].name).toBe("Air Cess Ltd");
@@ -65,14 +65,14 @@ describe("investigate_entity tool", () => {
   it("respects threshold filter", async () => {
     const lowScoreMatch = {
       responses: {
-        "0": {
+        q: {
           results: [
             {
-              ...matchFixture.responses["0"].results[0],
+              ...matchFixture.responses.q.results[0],
               score: 0.5,
             },
           ],
-          total: 1,
+          total: { value: 1, relation: "eq" },
         },
       },
     };
@@ -90,7 +90,9 @@ describe("investigate_entity tool", () => {
 
   it("handles no matches", async () => {
     const client = mockClient({
-      matchResult: { responses: { "0": { results: [], total: 0 } } },
+      matchResult: {
+        responses: { q: { results: [], total: { value: 0, relation: "eq" } } },
+      },
     });
     const result = await handleInvestigateEntity(client, {
       name: "Nobody",
@@ -120,12 +122,12 @@ describe("investigate_entity tool", () => {
   it("deduplicates entity IDs before fetching", async () => {
     const duplicateMatch = {
       responses: {
-        "0": {
+        q: {
           results: [
-            matchFixture.responses["0"].results[0],
-            { ...matchFixture.responses["0"].results[0], score: 0.9 },
+            matchFixture.responses.q.results[0],
+            { ...matchFixture.responses.q.results[0], score: 0.9 },
           ],
-          total: 2,
+          total: { value: 2, relation: "eq" },
         },
       },
     };
@@ -141,13 +143,13 @@ describe("investigate_entity tool", () => {
   it("limits matches to max_matches", async () => {
     const manyMatches = {
       responses: {
-        "0": {
+        q: {
           results: Array.from({ length: 10 }, (_, i) => ({
-            ...matchFixture.responses["0"].results[0],
+            ...matchFixture.responses.q.results[0],
             id: `NK-${i}`,
             score: 0.95 - i * 0.01,
           })),
-          total: 10,
+          total: { value: 10, relation: "eq" },
         },
       },
     };

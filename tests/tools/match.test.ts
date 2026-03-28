@@ -27,7 +27,7 @@ describe("match_entity tool", () => {
 
     const parsed = JSON.parse(result);
     expect(parsed.matches).toHaveLength(1);
-    expect(parsed.matches[0].score).toBe(0.95);
+    expect(parsed.matches[0].score).toBe(1.0);
     expect(parsed.matches[0].datasets).toContain("us_ofac_sdn");
   });
 
@@ -48,7 +48,7 @@ describe("match_entity tool", () => {
 
   it("handles no matches", async () => {
     const client = mockClient({
-      responses: { "0": { results: [], total: 0 } },
+      responses: { q: { results: [], total: { value: 0, relation: "eq" } } },
     });
     const result = await handleMatchEntity(client, {
       schema: "Person",
