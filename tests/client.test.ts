@@ -240,6 +240,34 @@ describe("OpenSanctionsClient", () => {
 
       await expect(client.search("test")).rejects.toThrow(/Cannot connect/);
     });
+
+    it("throws on timeout (AbortError)", async () => {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn().mockImplementation(
+          () =>
+            new Promise((_, reject) => {
+              const err = new DOMException(
+                "The operation was aborted",
+                "AbortError",
+              );
+              setTimeout(() => reject(err), 10);
+            }),
+        ),
+      );
+      const client = new OpenSanctionsClient(
+        testConfig({ maxRetries: 0, timeoutMs: 1000 }),
+      );
+
+      await expect(client.search("test")).rejects.toThrow(/timeout/i);
+    });
+
+    it("throws on generic HTTP error (400)", async () => {
+      mockFetch({ detail: "Bad request" }, 400);
+      const client = new OpenSanctionsClient(testConfig());
+
+      await expect(client.search("test")).rejects.toThrow(/400/);
+    });
   });
 
   describe("auth header", () => {

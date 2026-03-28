@@ -1,9 +1,7 @@
 import { logger } from "./logger.js";
 import type {
-  AlgorithmsResponse,
   CatalogResponse,
   EntityResponse,
-  HealthResponse,
   MatchResponse,
   SearchResponse,
 } from "./types.js";
@@ -211,25 +209,5 @@ export class OpenSanctionsClient {
       this.config,
     );
     return handleResponse<CatalogResponse>(response);
-  }
-
-  async getAlgorithms(): Promise<AlgorithmsResponse> {
-    const url = `${this.config.apiUrl}/algorithms`;
-    const response = await fetchWithRetry(
-      url,
-      { method: "GET", headers: headers(this.config) },
-      this.config,
-    );
-    return handleResponse<AlgorithmsResponse>(response);
-  }
-
-  async healthCheck(): Promise<HealthResponse> {
-    const url = `${this.config.apiUrl}/healthz`;
-    const response = await fetchWithRetry(
-      url,
-      { method: "GET", headers: headers(this.config) },
-      this.config,
-    );
-    return handleResponse<HealthResponse>(response);
   }
 }
