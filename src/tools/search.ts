@@ -28,13 +28,12 @@ export async function handleSearchEntities(
     id: entity.id,
     name: entity.caption,
     type: entity.schema,
-    score: entity.score,
     datasets: entity.datasets,
     properties: entity.properties,
   }));
 
   return JSON.stringify({
-    total: response.total,
+    total: response.total.value,
     results,
   });
 }

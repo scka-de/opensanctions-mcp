@@ -33,7 +33,7 @@ describe("investigate_entity tool", () => {
     expect(parsed.query.name).toBe("Viktor Bout");
     expect(parsed.query.schema).toBe("Person");
     expect(parsed.matches).toHaveLength(1);
-    expect(parsed.matches[0].score).toBe(0.95);
+    expect(parsed.matches[0].score).toBe(1.0);
     expect(parsed.matches[0].datasets).toContain("us_ofac_sdn");
     expect(parsed.matches[0].relationships).toHaveLength(1);
     expect(parsed.matches[0].relationships[0].name).toBe("Air Cess Ltd");
@@ -68,7 +68,7 @@ describe("investigate_entity tool", () => {
         "0": {
           results: [
             {
-              ...matchFixture.responses["0"].results[0],
+              ...matchFixture.responses.q.results[0],
               score: 0.5,
             },
           ],
@@ -122,8 +122,8 @@ describe("investigate_entity tool", () => {
       responses: {
         "0": {
           results: [
-            matchFixture.responses["0"].results[0],
-            { ...matchFixture.responses["0"].results[0], score: 0.9 },
+            matchFixture.responses.q.results[0],
+            { ...matchFixture.responses.q.results[0], score: 0.9 },
           ],
           total: 2,
         },
@@ -143,7 +143,7 @@ describe("investigate_entity tool", () => {
       responses: {
         "0": {
           results: Array.from({ length: 10 }, (_, i) => ({
-            ...matchFixture.responses["0"].results[0],
+            ...matchFixture.responses.q.results[0],
             id: `NK-${i}`,
             score: 0.95 - i * 0.01,
           })),

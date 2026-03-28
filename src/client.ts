@@ -177,7 +177,11 @@ export class OpenSanctionsClient {
   ): Promise<MatchResponse> {
     const dataset = options?.dataset || this.config.dataset;
     const url = `${this.config.apiUrl}/match/${dataset}`;
-    const body = { schema, properties };
+    const body = {
+      queries: {
+        q: { schema, properties },
+      },
+    };
 
     const response = await fetchWithRetry(
       url,

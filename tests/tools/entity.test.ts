@@ -15,14 +15,14 @@ describe("get_entity tool", () => {
   it("returns entity with relationships", async () => {
     const client = mockClient();
     const result = await handleGetEntity(client, {
-      entityId: "NK-2Ciy8EG7jz1YHMGCxYLb25",
+      entityId: "Q314650",
     });
 
-    expect(client.getEntity).toHaveBeenCalledWith("NK-2Ciy8EG7jz1YHMGCxYLb25");
+    expect(client.getEntity).toHaveBeenCalledWith("Q314650");
 
     const parsed = JSON.parse(result);
-    expect(parsed.id).toBe("NK-2Ciy8EG7jz1YHMGCxYLb25");
-    expect(parsed.name).toBe("Viktor Anatolyevich Bout");
+    expect(parsed.id).toBe("Q314650");
+    expect(parsed.name).toBe("Viktor Bout");
     expect(parsed.datasets).toContain("us_ofac_sdn");
     expect(parsed.relationships).toHaveLength(1);
     expect(parsed.relationships[0].name).toBe("Air Cess Ltd");
